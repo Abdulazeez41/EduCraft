@@ -10,7 +10,7 @@ EduCraft is not just another Learning Management System (LMS); it's a passion pr
 
 For a live demo, visit [EduCraft Demo](https://www.educraft-demo.com).
 
-Read about the journey and development process in our [Final Project Blog Article](https://www.educraft-blog.com).
+Read about the journey and development process in our [Final Project Blog Article](https://medium.com/@abdulazeezsalihu41/educraft-empowering-learning-through-a-seamless-educational-experience-0f56dc88edc2).
 
 **Authors:**
 
