@@ -1,0 +1,52 @@
+<!-- app/courses/templates/courses/view_course.html -->
+{% extends 'base.html' %} {% block content %}
+<h2>{{ course.title }}</h2>
+<p class="lead">{{ course.description }}</p>
+
+<dl class="row mt-4">
+  <dt class="col-sm-3">Instructor</dt>
+  <dd class="col-sm-9">{{ course.instructor.name }}</dd>
+
+  <dt class="col-sm-3">Enrollment Status</dt>
+  <dd class="col-sm-9">
+    {% if user_is_enrolled %} Enrolled {% else %} Not Enrolled
+    <a
+      href="{{ url_for('courses.enroll_course', course_id=course.id) }}"
+      class="btn btn-success ml-2"
+      >Enroll Now</a
+    >
+    {% endif %}
+  </dd>
+
+  <!-- Progress Section -->
+  <dt class="col-sm-3">Course Progress</dt>
+  <dd class="col-sm-9">
+  {% if user_is_enrolled %}
+    {% if course_progress is defined %}
+      <div class="progress">
+        <div 
+          class="progress-bar"
+          role="progressbar"
+          style="width: {{ course_progress }}%;" 
+          aria-valuenow="{{ course_progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ course_progress }}%
+        </div>
+      </div>
+    {% else %}
+      Not Available
+    {% endif %}
+  {% else %}
+    Please enroll in the course to track progress.
+  {% endif %}
+</dd>
+
+  </dd>
+</dl>
+
+<a href="{{ url_for('courses.list_courses') }}" class="btn btn-secondary"
+  >Back to Courses</a
+>
+{% endblock %}

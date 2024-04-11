@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h2 class="mt-5 mb-4">My Courses</h2>
+
+  {% if user_enrollments %}
+  <ul class="list-group">
+    {% for enrollment in user_enrollments %}
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
+      {{ enrollment.course.title }}
+      <span class="badge bg-primary rounded-pill"
+        >Progress: {{ enrollment.progress }}%</span
+      >
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="mt-3">You are not enrolled in any courses.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!-- app/courses/templates/courses/list_courses.html -->
+{% extends 'base.html' %} {% block content %}
+<h2>Available Courses</h2>
+
+{% for course in courses %}
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ course.title }}</h5>
+    <p class="card-text">{{ course.description }}</p>
+    <a
+      href="{{ url_for('courses.list_courses') }}"
+      class="btn btn-primary"
+      >View Details</a
+    >
+  </div>
+</div>
+{% endfor %} {% endblock %}
