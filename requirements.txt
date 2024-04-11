@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+flask-login
+Flask-WTF
+python-dateutil
+email_validator
+Flask-Migrate
+flask_bcrypt
