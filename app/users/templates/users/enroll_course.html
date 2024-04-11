@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Enroll in Course</h2>
+  <p>Course: {{ course.title }}</p>
+  <form method="POST" action="{{ url_for('users.enroll_course', course_id=course.id) }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+{% endblock %}
