@@ -1,0 +1,9 @@
+/* Add this to your custom CSS file or style tag in the HTML */
+.btn-custom {
+  background-color: #a8493e;
+  color: #fff;
+}
+
+.btn-custom:hover {
+  background-color: #2f4c5e;
+}
