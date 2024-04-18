@@ -121,9 +121,9 @@ To run EduCraft locally, follow these steps:
 
 EduCraft offers a dynamic learning experience. Explore the various educational games and activities, track progress through interactive dashboards, and witness the power of personalized education.
 
-## Contributing
+## Contributors
 
-We welcome contributions from the community. If you'd like to contribute to EduCraft, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
+We welcome contributions from the community. If you'd like to contribute to EduCraft, please follow the guidelines in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 Please make sure to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
