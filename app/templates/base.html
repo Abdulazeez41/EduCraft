@@ -32,7 +32,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('courses.list_courses') }}">Courses</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('courses.list_courses') }}"
+                >Courses</a
+              >
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
             </li>
@@ -41,7 +45,30 @@
                 >Contact</a
               >
             </li>
-            {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated %} {% if current_user.role ==
+            'learner' %}
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{{ url_for('learner.learner_dashboard') }}"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-outline-primary"
+                href="{{ url_for('auth.logout') }}"
+                >Logout</a
+              >
+            </li>
+            {% elif current_user.role == 'instructor' %}
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{{ url_for('instructor.instructor_dashboard') }}"
+                >Dashboard</a
+              >
+            </li>
             <li class="nav-item">
               <a
                 class="nav-link btn btn-outline-primary"
@@ -50,6 +77,14 @@
               >
             </li>
             {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-primary text-white"
+                href="{{ url_for('auth.login') }}"
+                >Sign In</a
+              >
+            </li>
+            {% endif %} {% else %}
             <li class="nav-item">
               <a
                 class="nav-link btn btn-primary text-white"
