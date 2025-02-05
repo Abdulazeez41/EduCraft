@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from app import db
 
 # Constants
-ROLE_CHOICES = ('user', 'instructor')
+ROLE_CHOICES = ('user', 'instructor', 'learner')
 QUESTION_TYPES = ('MCQ', 'Short Answer', 'Coding')
 SUBMISSION_STATUSES = ('pending', 'graded')
 
@@ -88,6 +88,7 @@ class CompletedActivity(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False, index=True)
     activity_id = db.Column(db.Integer, db.ForeignKey('activities.id'), nullable=False, index=True)
     completed_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
