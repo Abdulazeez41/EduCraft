@@ -1,5 +1,9 @@
 from flask import Blueprint
 
-users = Blueprint('users', __name__, template_folder='templates')
+users = Blueprint('users', __name__)
 
-from . import routes
+from .instructor.routes import instructor
+from .learner.routes import learner
+
+users.register_blueprint(instructor, url_prefix='/instructor')
+users.register_blueprint(learner, url_prefix='/learner')
