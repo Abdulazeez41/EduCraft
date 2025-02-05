@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block title %}Welcome to Educraft{% endblock %} {%
+block content %}
+
+<section class="hero bg-secondary text-white text-center py-5">
+  <div class="container">
+    <h1 class="display-4 fw-bold">Welcome to Educraft</h1>
+    <p class="lead">
+      Empowering learners and instructors through interactive education.
+    </p>
+    {% if not current_user.is_authenticated %}
+    <a
+      href="{{ url_for('auth.register_learner') }}"
+      class="btn btn-light btn-lg mt-3"
+      >Get Started</a
+    >
+    {% endif %}
+  </div>
+</section>
+
+<section class="features py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="bi bi-book-fill text-primary fs-1"></i>
+        <h4 class="mt-3">Interactive Learning</h4>
+        <p>Experience hands-on learning with engaging content and quizzes.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-person-check-fill text-primary fs-1"></i>
+        <h4 class="mt-3">Expert Instructors</h4>
+        <p>Learn from industry experts with years of experience.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-clock-fill text-primary fs-1"></i>
+        <h4 class="mt-3">Flexible Schedule</h4>
+        <p>Study at your own pace with 24/7 access to courses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if not current_user.is_authenticated %}
+<section class="cta bg-light py-5 text-center">
+  <div class="container">
+    <h3 class="fw-bold">Join Educraft as a Learner or an Instructor</h3>
+    <p class="lead">Select your role to get started.</p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a
+        href="{{ url_for('auth.register_learner') }}"
+        class="btn btn-primary btn-lg"
+        >Register as a Learner</a
+      >
+      <a
+        href="{{ url_for('auth.register_instructor') }}"
+        class="btn btn-primary btn-lg"
+        >Register as an Instructor</a
+      >
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="cta bg-light py-5 text-center">
+  <div class="container">
+    <h3>Ready to Learn?</h3>
+    <p>Join thousands of learners on Educraft today.</p>
+    {% if not current_user.is_authenticated %}
+    <a
+      href="{{ url_for('auth.register_learner') }}"
+      class="btn btn-primary btn-lg"
+      >Start Learning</a
+    >
+    {% else %} {% if current_user.role == 'learner' %}
+    <a
+      href="{{ url_for('learner.learner_dashboard') }}"
+      class="btn btn-primary btn-lg"
+      >Go to Dashboard</a
+    >
+    {% elif current_user.role == 'instructor' %}
+    <a
+      href="{{ url_for('instructor.instructor_dashboard') }}"
+      class="btn btn-primary btn-lg"
+      >Go to Dashboard</a
+    >
+    {% else %}
+    <a
+      href="{{ url_for('learner.learner_dashboard') }}"
+      class="btn btn-primary btn-lg"
+      >Go to Dashboard</a
+    >
+    {% endif %} {% endif %}
+  </div>
+</section>
+
+{% endblock %}
