@@ -1,17 +1,33 @@
-<!-- app/courses/templates/courses/list_courses.html -->
 {% extends 'base.html' %} {% block content %}
-<h2>Available Courses</h2>
-
-{% for course in courses %}
-<div class="card mb-3">
-  <div class="card-body">
-    <h5 class="card-title">{{ course.title }}</h5>
-    <p class="card-text">{{ course.description }}</p>
-    <a
-      href="{{ url_for('courses.list_courses') }}"
-      class="btn btn-primary"
-      >View Details</a
-    >
+<div class="container py-5">
+  <h2 class="text-center mb-4">Explore Our Courses</h2>
+  <div class="row">
+    {% for course in courses %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm border-0 rounded-lg h-100">
+        <img
+          src="{{ course.image_url or 'https://via.placeholder.com/300' }}"
+          class="card-img-top"
+          alt="Course Image"
+        />
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ course.title }}</h5>
+          <p class="card-text text-muted">{{ course.description[:100] }}...</p>
+        </div>
+        <div class="card-footer bg-white border-0 text-center">
+          <a
+            href="{{ url_for('courses.view_course', course_id=course.id) }}"
+            class="btn btn-outline-primary w-100"
+            >View Details</a
+          >
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center">
+      <p class="text-muted">No courses available at the moment.</p>
+    </div>
+    {% endfor %}
   </div>
 </div>
-{% endfor %} {% endblock %}
+{% endblock %}
