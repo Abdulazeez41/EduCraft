@@ -1,10 +1,45 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container mt-5">
-  <h1 class="display-4">{{ course.title }}</h1>
-  <p class="lead">{{ course.description }}</p>
-  <p class="font-weight-bold">Instructor: {{ course.instructor.username }}</p>
-  <p class="font-italic">
-    Date Created: {{ course.date_created.strftime('%Y-%m-%d %H:%M:%S') }}
-  </p>
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white text-center py-4">
+      <h1 class="display-4">{{ course.title }}</h1>
+      <p class="lead">{{ course.description }}</p>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <h3 class="font-weight-bold mb-3">Course Overview</h3>
+          <p class="font-italic text-muted">
+            <strong>Instructor:</strong>
+            <span class="text-info">{{ course.instructor.username }}</span>
+          </p>
+          <p class="font-italic text-muted">
+            <strong>Date Created:</strong> {{
+            course.date_created.strftime('%Y-%m-%d %H:%M:%S') }}
+          </p>
+        </div>
+        <div class="col-md-4">
+          <div class="bg-light p-3 rounded-lg shadow-sm">
+            <h4 class="font-weight-bold">Course Details</h4>
+            <ul class="list-unstyled">
+              <li><strong>Category:</strong> {{ course.category }}</li>
+              <li><strong>Duration:</strong> {{ course.duration }} hours</li>
+              <li><strong>Level:</strong> {{ course.level }}</li>
+            </ul>
+            <a
+              href="{{ url_for('enroll', course_id=course.id) }}"
+              class="btn btn-primary btn-lg btn-block"
+              >Enroll Now</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted text-center py-3">
+      <p class="mb-0">
+        Join the community of learners and start mastering today!
+      </p>
+    </div>
+  </div>
 </div>
 {% endblock %}
