@@ -1,7 +1,3 @@
-Here is the updated version of your README file with the "Interactive Dashboards with Plotly" section removed:
-
----
-
 # EduCraft
 
 _Empowering Minds Through Interactive Learning Experiences and Seamless Progress Tracking._
