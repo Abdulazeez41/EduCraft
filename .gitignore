@@ -1,2 +1,11 @@
 .env
-_pycache_
+__pycache___
+app/__pycache__/
+app/courses/__pycache__/__init__.cpython-38.pyc
+app/courses/__pycache__/forms.cpython-38.pyc
+app/courses/__pycache__/routes.cpython-38.pyc
+app/main/__pycache__/__init__.cpython-38.pyc
+app/main/__pycache__/routes.cpython-38.pyc
+app/users/__pycache__/__init__.cpython-38.pyc
+app/users/__pycache__/forms.cpython-38.pyc
+app/users/__pycache__/routes.cpython-38.pyc
