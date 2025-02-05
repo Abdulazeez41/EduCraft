@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm p-4 mb-4">
+    <h2 class="text-center mb-4">Enroll in Course</h2>
+    <p class="mb-4">Course: <strong>{{ course.title }}</strong></p>
+
+    <form
+      method="POST"
+      action="{{ url_for('users.enroll_course', course_id=course.id) }}"
+    >
+      {{ form.hidden_tag() }}
+      <div class="form-group mb-3">
+        {{ form.submit(class="btn btn-primary w-100") }}
+      </div>
+    </form>
+  </div>
+
+  {% if success %}
+  <div class="card shadow-sm p-4 mb-4">
+    <h2 class="text-center text-success mb-4">Enrollment Successful!</h2>
+    <section class="enrollment-confirmation">
+      <h3 class="text-center mb-3">
+        You have successfully enrolled in <strong>{{ course.title }}</strong> 🎉
+      </h3>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <p><strong>Category:</strong> {{ course.category }}</p>
+          <p><strong>Instructor:</strong> {{ course.instructor.username }}</p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <p><strong>Lessons:</strong> {{ course.lessons | length }}</p>
+          <p>Start your learning journey now!</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <a
+          href="{{ url_for('course.view_course', course_id=course.id) }}"
+          class="btn btn-success btn-lg"
+          >Start Learning</a
+        >
+      </div>
+    </section>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

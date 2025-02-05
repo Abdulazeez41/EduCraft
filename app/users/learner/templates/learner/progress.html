@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">My Progress</h2>
+
+  {% if enrolled_courses %}
+  <div class="row">
+    {% for course in enrolled_courses %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm border-light rounded">
+        <img
+          src="{{ course.image_url }}"
+          class="card-img-top"
+          alt="{{ course.title }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ course.title }}</h5>
+          <p class="card-text">{{ course.description | truncate(150) }}</p>
+          <a
+            href="{{ url_for('courses.course_details', course_id=course.id) }}"
+            class="btn btn-primary"
+            >View Course</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-warning text-center">
+    <p>You are not enrolled in any courses yet.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

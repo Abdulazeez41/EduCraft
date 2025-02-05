@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h2>Welcome, {{ user.username }}!</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-primary text-white">
+          <h4>Your Enrolled Courses</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            {% for course in enrolled_courses %}
+            <li class="list-group-item">
+              <a
+                href="{{ url_for('courses.view_course', course_id=course.course_id) }}"
+                class="text-decoration-none"
+              >
+                {{ course.course.title }}
+              </a>
+            </li>
+            {% else %}
+            <p class="text-muted">You are not enrolled in any courses yet.</p>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-success text-white">
+          <h4>Bookmarked Lessons</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            {% for bookmark in bookmarked_lessons %}
+            <li class="list-group-item">
+              <a
+                href="{{ url_for('lesson.view_lesson', lesson_id=bookmark.lesson_id) }}"
+                class="text-decoration-none"
+              >
+                Lesson {{ bookmark.lesson_id }}
+              </a>
+            </li>
+            {% else %}
+            <p class="text-muted">No bookmarked lessons.</p>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-lg">
+    <div class="card-header bg-warning text-white">
+      <h4>Progress Overview</h4>
+    </div>
+    <div class="card-body">
+      <canvas id="progressChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      var ctx = document.getElementById("progressChart").getContext("2d");
+      var progressChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+              labels: {{ progress_labels | tojson }},
+              datasets: [{
+                  label: "Progress (%)",
+                  data: {{ progress_values | tojson }},
+                  backgroundColor: "rgba(54, 162, 235, 0.6)"
+              }]
+          },
+          options: {
+              responsive: true,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  });
+</script>
+{% endblock %}
