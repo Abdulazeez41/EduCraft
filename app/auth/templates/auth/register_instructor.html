@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Create Your Instructor Account</h2>
+          <form method="POST" action="{{ url_for('auth.register_instructor') }}">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+              {{ form.username.label(class="form-control-label font-weight-bold") }}
+              {{ form.username(class="form-control") }}
+              {% for error in form.username.errors %}
+              <small class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.email.label(class="form-control-label font-weight-bold") }}
+              {{ form.email(class="form-control") }}
+              {% for error in form.email.errors %}
+              <small class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.password.label(class="form-control-label font-weight-bold") }}
+              {{ form.password(class="form-control") }}
+              {% for error in form.password.errors %}
+              <small class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.confirm_password.label(class="form-control-label font-weight-bold") }}
+              {{ form.confirm_password(class="form-control") }}
+              {% for error in form.confirm_password.errors %}
+              <small class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.bio.label(class="form-control-label font-weight-bold") }}
+              {{ form.bio(class="form-control") }}
+              {% for error in form.bio.errors %}
+              <small class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.expertise.label(class="form-control-label font-weight-bold") }}
+              {{ form.expertise(class="form-control") }}
+              {% for error in form.expertise.errors %}
+              <small class="text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+
+            <div class="text-center">
+              {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+            </div>
+          </form>
+
+          <p class="text-center mt-3">
+            Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a>.
+          </p>
+
+          <p class="text-center mt-3">
+            Signed up as the wrong role?  
+            <a href="{{ url_for('auth.register_learner') }}" class="text-primary">Register as a Learner</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
