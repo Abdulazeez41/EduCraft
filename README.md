@@ -1,3 +1,7 @@
+Here is the updated version of your README file with the "Interactive Dashboards with Plotly" section removed:
+
+---
+
 # EduCraft
 
 _Empowering Minds Through Interactive Learning Experiences and Seamless Progress Tracking._
@@ -15,11 +19,10 @@ Read about the journey and development process in our [Final Project Blog Articl
 **Authors:**
 
 - Abdulazeez Salihu - [LinkedIn](https://www.linkedin.com/in/Abdulazeez/)
-- Saheed Lukman - [LinkedIn](https://www.linkedin.com/in/Saheed/)
 
 ## The Story Behind EduCraft
 
-The seed for EduCraft was planted during late-night brainstorming sessions, fueled by the frustration of conventional LMS platforms lacking the spark to truly engage students. We envisioned an immersive learning environment where students could explore subjects through interactive games and activities.
+The seed for EduCraft was planted during late-night brainstorming sessions, fueled by the frustration of conventional LMS platforms lacking the spark to truly engage students. I envisioned an immersive learning environment where students could explore subjects through interactive games and activities.
 
 **Technical Challenges and Solutions**
 
@@ -35,16 +38,6 @@ The seed for EduCraft was planted during late-night brainstorming sessions, fuel
   @app.route('/')
   def home():
       return render_template('index.html')
-  ```
-
-- **Interactive Dashboards with Plotly:**
-  One of the challenges was creating dynamic and visually appealing dashboards to track student progress. We turned to Plotly for its expressive capabilities, allowing us to visualize data in real-time.
-
-  ```python
-  # Code snippet showcasing Plotly integration
-  import plotly.express as px
-
-  fig = px.bar(data, x='subject', y='progress', color='student', title='Student Progress Overview')
   ```
 
 - **User Authentication with Flask-Login:**
@@ -63,9 +56,9 @@ EduCraft is more than lines of code; it's a reflection of countless late nights,
 
 ## Struggles and Future Iterations
 
-While developing EduCraft, we faced challenges—bugs that seemed impossible to squash, design choices that kept us up at night, and moments of self-doubt. This project is a testament to perseverance and continuous learning.
+While developing EduCraft, i faced challenges—bugs that seemed impossible to squash, design choices that kept us up at night, and moments of self-doubt. This project is a testament to perseverance and continuous learning.
 
-In the next iteration, we plan to enhance user interactivity, introduce AI-driven recommendations, and expand the range of subjects. We invite the community to contribute ideas and code to make EduCraft even more impactful.
+In the next iteration, i plan to enhance user interactivity, introduce AI-driven recommendations, and expand the range of subjects. I invite the community to contribute ideas and code to make EduCraft even more impactful.
 
 ## Installation
 
@@ -112,10 +105,10 @@ To run EduCraft locally, follow these steps:
 6. Run the application:
 
    ```bash
-   python3 manage.py
+   python3 app.py
    ```
 
-   The application will be accessible at `http://localhost:5000` by default.
+   The application will be accessible at `http://localhost:5001` by default.
 
 ## Usage
 
@@ -123,7 +116,7 @@ EduCraft offers a dynamic learning experience. Explore the various educational g
 
 ## Contributing
 
-We welcome contributions from the community. If you'd like to contribute to EduCraft, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
+I welcome contributions from the community. If you'd like to contribute to EduCraft, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Please make sure to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
