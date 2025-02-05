@@ -1,9 +1,89 @@
-/* Add this to your custom CSS file or style tag in the HTML */
-.btn-custom {
-  background-color: #a8493e;
-  color: #fff;
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #c7cfd7;
+  color: #333;
 }
 
-.btn-custom:hover {
-  background-color: #2f4c5e;
+.navbar {
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #5fa9ba6f;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  padding: 10px 15px;
+}
+
+.navbar-nav .btn {
+  margin-left: 10px;
+}
+
+.hero {
+  background: url("../images/banner-item-01.jpg") no-repeat center center/cover;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  animation: bounceIn 1.5s ease-in-out;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+.hero .btn {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+}
+
+.features {
+  text-align: center;
+}
+
+.features i {
+  font-size: 3rem;
+}
+
+.cta {
+  background-color: #ffffff;
+  padding: 50px;
+}
+
+.cta h3 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+footer {
+  background: #343a40;
+  color: #333;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 50px;
 }
