@@ -1,33 +1,38 @@
-<!-- app/courses/templates/courses/view_course.html -->
 {% extends 'base.html' %} {% block content %}
-<h2>{{ course.title }}</h2>
-<p class="lead">{{ course.description }}</p>
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-primary">{{ course.title }}</h2>
+    <p class="lead">{{ course.description }}</p>
 
-<dl class="row mt-4">
-  <dt class="col-sm-3">Instructor</dt>
-  <dd class="col-sm-9">{{ course.instructor.name }}</dd>
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <p><strong>Category:</strong> {{ course.category }}</p>
+        <p><strong>Difficulty:</strong> {{ course.difficulty_level }}</p>
+        <p><strong>Instructor:</strong> {{ course.instructor.username }}</p>
+        <p><strong>Duration:</strong> {{ course.duration }} hours</p>
+        <p><strong>Lessons:</strong> {{ course.lessons | length }}</p>
+      </div>
+      <div class="col-md-6 text-center">
+        {% if user_is_enrolled %}
+        <p class="badge bg-success">Enrolled</p>
+        {% else %}
+        <a
+          href="{{ url_for('courses.enroll_course', course_id=course.id) }}"
+          class="btn btn-primary"
+          >Enroll Now</a
+        >
+        {% endif %}
+      </div>
+    </div>
 
-  <dt class="col-sm-3">Enrollment Status</dt>
-  <dd class="col-sm-9">
-    {% if user_is_enrolled %} Enrolled {% else %} Not Enrolled
-    <a
-      href="{{ url_for('courses.enroll_course', course_id=course.id) }}"
-      class="btn btn-success ml-2"
-      >Enroll Now</a
-    >
-    {% endif %}
-  </dd>
-
-  <!-- Progress Section -->
-  <dt class="col-sm-3">Course Progress</dt>
-  <dd class="col-sm-9">
-  {% if user_is_enrolled %}
-    {% if course_progress is defined %}
+    {% if user_is_enrolled %}
+    <div class="mt-4">
+      <h4>Course Progress</h4>
       <div class="progress">
-        <div 
-          class="progress-bar"
+        <div
+          class="progress-bar bg-info"
           role="progressbar"
-          style="width: {{ course_progress }}%;" 
+          style="width: {{ course_progress }}%"
           aria-valuenow="{{ course_progress }}"
           aria-valuemin="0"
           aria-valuemax="100"
@@ -35,18 +40,36 @@
           {{ course_progress }}%
         </div>
       </div>
-    {% else %}
-      Not Available
+    </div>
     {% endif %}
-  {% else %}
-    Please enroll in the course to track progress.
+  </div>
+
+  {% if user_is_enrolled %}
+  <div class="card shadow-lg p-4 mt-5">
+    <h3 class="text-secondary">Course Lessons</h3>
+    <ul class="list-group">
+      {% for lesson in course.lessons %}
+      <li
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <a
+          href="{{ url_for('lesson.view_lesson', lesson_id=lesson.id) }}"
+          class="text-decoration-none"
+          >{{ lesson.title }}</a
+        >
+        {% if lesson.id in completed_lessons %}
+        <span class="badge bg-success">Completed ✅</span>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
   {% endif %}
-</dd>
 
-  </dd>
-</dl>
-
-<a href="{{ url_for('courses.list_courses') }}" class="btn btn-secondary"
-  >Back to Courses</a
->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('courses.list_courses') }}" class="btn btn-secondary"
+      >Back to Courses</a
+    >
+  </div>
+</div>
 {% endblock %}
