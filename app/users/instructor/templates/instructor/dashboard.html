@@ -1,0 +1,236 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+  <div class="text-center mb-4">
+    <h2>Welcome, {{ current_user.username }}!</h2>
+    <button onclick="toggleTheme()" class="btn btn-dark mt-2">
+      Toggle Dark Mode
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-primary text-white">
+          <h4>Courses</h4>
+        </div>
+        <div class="card-body">
+          <p class="lead">{{ courses | length }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-success text-white">
+          <h4>Learners</h4>
+        </div>
+        <div class="card-body">
+          <p class="lead">125</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-warning text-white">
+          <h4>Quizzes Created</h4>
+        </div>
+        <div class="card-body">
+          <p class="lead">10</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-info text-white">
+          <h4>Assignments</h4>
+        </div>
+        <div class="card-body">
+          <p class="lead">15</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-4">
+    <div class="col-md-3">
+      <a
+        href="{{ url_for('instructor.create_course') }}"
+        class="btn btn-primary btn-lg w-100"
+        >Create Course</a
+      >
+    </div>
+    <div class="col-md-3">
+      <a
+        href="{{ url_for('instructor.manage_courses') }}"
+        class="btn btn-success btn-lg w-100"
+        >Manage Courses</a
+      >
+      </div>
+      <div class="col-md-3">
+        <a
+          href="{{ url_for('instructor.view_analytics') }}"
+          class="btn btn-info btn-lg w-100"
+          >View Analytics</a
+        >
+      </div>
+      <div class="col-md-3">
+        <a
+          href="{{ url_for('instructor.grade_submission', submission_id=1) }}"
+          class="btn btn-danger btn-lg w-100"
+          >Grade Submissions</a
+        >
+      </div>
+      <div class="col-md-3">
+        {% for course in courses %}
+        <a
+          href="{{ url_for('instructor.manage_learners', course_id=course.id) }}"
+          class="btn btn-success btn-lg w-100"
+          >Manage Learners</a
+        >
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="my-4">
+      <h3>My Courses</h3>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Course Title</th>
+                <th>Description</th>
+                <th>Enrolled</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for course in courses %}
+              <tr>
+                <td>{{ course.title }}</td>
+                <td>{{ course.description }}</td>
+                <td>50</td>
+                <td>
+                  <a
+                    href="{{ url_for('course.view_course', course_id=course.id) }}"
+                    class="btn btn-info btn-sm"
+                    >View</a
+                  >
+                  <a
+                    href="{{ url_for('course.edit_course', course_id=course.id) }}"
+                    class="btn btn-warning btn-sm"
+                    >Edit</a
+                  >
+                  <a
+                    href="{{ url_for('course.delete_course', course_id=course.id) }}"
+                    class="btn btn-danger btn-sm"
+                    >Delete</a
+                  >
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="4" class="text-center">No courses available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-md-3">
+        {% for course in courses %}
+        <a
+          href="{{ url_for('instructor.create_assignment', course_id=course.id) }}"
+          class="btn btn-primary btn-lg w-100"
+          >Create Assignment</a
+        >
+        {% endfor %}
+      </div>
+      <div class="col-md-3">
+        {% for course in courses %}
+        <a
+          href="{{ url_for('instructor.create_quiz', course_id=course.id) }}"
+          class="btn btn-warning btn-lg w-100"
+          >Create Quiz</a
+        >
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="my-4">
+      <h3>Live Chat 💬</h3>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <div class="chat-box" id="chat-box"></div>
+          <div class="input-group mt-3">
+            <input
+              type="text"
+              id="chat-input"
+              class="form-control"
+              placeholder="Type a message..."
+            />
+            <button onclick="sendMessage()" class="btn btn-primary">
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-4">
+      <h3>Notifications <i class="fas fa-bell"></i></h3>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              New student enrolled in "Python Basics" 🚀
+            </li>
+            <li class="list-group-item">Assignment submitted for review 📑</li>
+            <li class="list-group-item">Quiz results available 📊</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-4">
+      <h3>Dashboard Overview</h3>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <canvas id="dashboardChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    var chartConfig = {
+        type: 'bar',
+        data: {
+            labels: {{ chart_labels | default([]) | tojson }},
+            datasets: [{
+                label: "Course Statistics",
+                data: [10, 20, 30],
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+  </script>
+
+  {% endblock %}
+</div>

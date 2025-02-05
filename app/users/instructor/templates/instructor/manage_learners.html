@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Manage Learners - {{ course.title }}</h2>
+
+  <div class="card p-4 shadow-sm">
+    <h5 class="mb-3 text-muted">Enrolled Learners</h5>
+
+    {% if learners %}
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Enrollment Date</th>
+          <th>Status</th>
+          <th>Completed Activities</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for learner in learners %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ learner.username }}</td>
+          <td>{{ learner.email }}</td>
+          <td>{{ learner.enrollment_date.strftime('%Y-%m-%d') }}</td>
+          <td>
+            <span
+              class="badge {% if learner.status == 'active' %}bg-success{% else %}bg-secondary{% endif %}"
+            >
+              {{ learner.status.capitalize() }}
+            </span>
+          </td>
+          <td>{{ learner.completed_activities }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-muted text-center">
+      No learners have enrolled in this course yet.
+    </p>
+    {% endif %}
+  </div>
+
+  <div class="mt-4">
+    <a href="{{ url_for('instructor.dashboard') }}" class="btn btn-secondary"
+      >Back to Dashboard</a
+    >
+  </div>
+</div>
+{% endblock %}

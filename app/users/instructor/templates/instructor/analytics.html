@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Course Analytics</h2>
+
+  <div class="card p-4 shadow-sm">
+    <h5 class="mb-3 text-muted">Course Completion & Enrollment Statistics</h5>
+
+    {% if statistics %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Course Name</th>
+            <th>Avg Completion (%)</th>
+            <th>Total Students</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course, avg_completion, total_students in statistics %}
+          <tr>
+            <td>{{ course }}</td>
+            <td>{{ "%.2f"|format(avg_completion or 0) }}%</td>
+            <td>{{ total_students }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center">
+      No analytics data available.
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

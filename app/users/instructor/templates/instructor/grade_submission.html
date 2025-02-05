@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Grade Submission</h2>
+
+  <div class="card p-4 shadow-sm">
+    <h5 class="mb-3 text-muted">Submission Details</h5>
+    <p><strong>Student ID:</strong> {{ submission.user_id }}</p>
+    <p><strong>Assignment ID:</strong> {{ submission.assignment_id }}</p>
+    <p><strong>Submitted At:</strong> {{ submission.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    
+    {% if submission.submitted_file %}
+      <p><strong>Submitted File:</strong> <a href="{{ url_for('static', filename='uploads/' + submission.submitted_file) }}" target="_blank">View File</a></p>
+    {% else %}
+      <p><strong>Submitted File:</strong> No file uploaded.</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('instructor.grade_submission', submission_id=submission.id) }}">
+      <div class="mb-3">
+        <label for="grade" class="form-label">Grade</label>
+        <input type="number" name="grade" id="grade" class="form-control" min="0" max="100" value="{{ submission.grade if submission.grade is not none else '' }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="feedback" class="form-label">Feedback</label>
+        <textarea name="feedback" id="feedback" class="form-control" rows="4">{{ submission.feedback if submission.feedback else '' }}</textarea>
+      </div>
+
+      <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">Submit Grade</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

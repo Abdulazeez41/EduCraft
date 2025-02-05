@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Create Assignment</h2>
+
+  <div class="card p-4 shadow-sm">
+    <h5 class="mb-3 text-muted">Assignment Details</h5>
+    <form method="POST" action="{{ url_for('instructor.create_assignment', course_id=course_id) }}" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+
+      <div class="mb-3">
+        {{ form.title.label(class="form-label") }} 
+        {{ form.title(class="form-control") }}
+        <small class="form-text text-muted">Enter a unique title for the assignment.</small>
+      </div>
+
+      <div class="mb-3">
+        {{ form.description.label(class="form-label") }} 
+        {{ form.description(class="form-control", rows="4") }}
+        <small class="form-text text-muted">Provide a brief description of the assignment.</small>
+      </div>
+
+      <div class="mb-3">
+        {{ form.due_date.label(class="form-label") }} 
+        {{ form.due_date(class="form-control") }}
+        <small class="form-text text-muted">Select the due date for submission.</small>
+      </div>
+
+      <div class="mb-3">
+        {{ form.file_upload.label(class="form-label") }} 
+        {{ form.file_upload(class="form-control") }}
+        <small class="form-text text-muted">Upload a PDF or DOCX file if required.</small>
+      </div>
+
+      <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">Create Assignment</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
